@@ -1,0 +1,38 @@
+Speed Km/H @ 00504e18 (4B):
+W:
+000115e0 (attract speed)
+00225ed8 ( = 0 transmission select)
+0000e44c ( = 0 boot, game start, attract start)
+0000e620 (game speed)
+0000b3ec ( = 0 game over)
+
+Position: 0 indexed @ 00504e68 (2B):
+0000C8a0 (start race )
+000122d8 (rolling start) 
+000122c0 (game - after first OT)
+
+Gear: 0 indexed 0-3 @ 504f48 (4B)
+0000c844 (race start)
+00011dbc (rolling start / auto upshift)
+00011e04 (game / auto downshift)
+00011f70 (game manual down)
+00011f04 (game manual up)
+
+Revs: @ 00504f50 / 00504f54 (4B 1/2 pair) 0-8500 (0x2134) (8500):
+* 00504f50:
+0000e498 ( = 0 race start / attract start / attract view change)
+000103fc (rolling start / game)
+00011dec (rolling start)
+00011f54 (? high val > 8500)
+00011eac (? high val > 8500)
+* 00504f54:
+0000e49c ( = 0 race start / attract start / attract view change)
+00011e7c (rolling start)
+00012064 (game)
+
+Current Lap: @ 5010e0 (4B) 0-7
+00003120 ( = 0 race start)
+000135dc (game inc +1 per lap)
+
+Total Laps: @ 5010ec (4B) 2/4/8
+0000387c ( = 8 Boot, attract track change, race start)
