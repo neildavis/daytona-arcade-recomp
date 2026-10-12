@@ -3,6 +3,23 @@
 # ADDRESS. Addresses only, our own analysis (rules.md rule 7); see
 # src/runtime/enhance.h. Each hook does nothing while its option is off.
 #
+00003120 hud_lap_cur
+00003408 hud_time
+000035a0 hud_time
+0000387c hud_lap_tot
+0000b3ec hud_speed
+0000e44c hud_speed
+0000e49c hud_rpm
+0000e620 hud_speed
+00011dbc hud_gear
+00011e04 hud_gear
+00011e7c hud_rpm
+00011f04 hud_gear
+00011f70 hud_gear
+00012064 hud_rpm
+000122c0 hud_pos
+000122d8 hud_pos
+000135dc hud_lap_cur
 # 0x16f74..0x17070 builds the list of course cells to draw (count 0x5016c0,
 # cells from 0x5016c1) from the 5x5 cells around the car's: offsets
 # dx + 16 dy (table 0x17136), slot order nearest first (0x17104, 0x1711d on
