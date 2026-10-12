@@ -117,6 +117,7 @@ add_library(runtime STATIC
     src/runtime/native_sound_sequencer.cpp
     src/runtime/native_sound_engine.cpp
     src/runtime/enhance.cpp
+    src/runtime/hud.cpp
     src/runtime/comm_board.cpp
 )
 target_include_directories(runtime PUBLIC src)
