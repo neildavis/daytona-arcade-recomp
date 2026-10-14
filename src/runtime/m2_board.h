@@ -37,6 +37,19 @@ struct Inputs {
     uint8_t in0 = 0xff, in1 = 0x8f, in2 = 0xff;       // switches, active low (MAME IN0/IN1/IN2 layout)
 };
 
+// namespaced to Daytona since other games used the same IO board with alternate bitfield layouts
+// See MAME model2.cpp lamp_output_w for details
+enum DaytonaOutputsDataMask : uint8_t {
+    DaytonaCoinCtr1     = 1 << 0,
+    DaytonaCoinCtr2     = 1 << 1,
+    DaytonaLampStart    = 1 << 2, 
+    DaytonaLampVr1      = 1 << 3, 
+    DaytonaLampVr2      = 1 << 4, 
+    DaytonaLampVr3      = 1 << 5, 
+    DaytonaLampVr4      = 1 << 6, 
+    DaytonaLampLeader   = 1 << 7, 
+};
+
 // The I/O board's side of the MB8421 dual-port RAM (2 KB): the game writes a
 // command to byte 0x20 and the board answers. 1: latch the inputs into bytes
 // 0-10. 3: copy the 128-byte settings EEPROM to bytes 0x100-0x17f. 2: store
@@ -49,6 +62,7 @@ public:
     uint8_t read(uint32_t index) const { return ram_[index & 0x7ff]; }
     void write(uint32_t index, uint8_t v);
     Inputs inputs;
+    uint8_t outputs; // bitfield of (e.g.) DaytonaOutputsDataMask
     std::array<uint8_t, 128> eeprom;
     bool eeprom_dirty = false;
     std::vector<uint8_t> drive_commands; // written to byte 0x11 since last taken (at most kMaxDrive kept)
@@ -56,6 +70,7 @@ public:
     IoBoard() { ram_.fill(0); eeprom.fill(0xff); }
 
 private:
+    void outputs_write(uint8_t data);
     std::array<uint8_t, 0x800> ram_;
 };
 
