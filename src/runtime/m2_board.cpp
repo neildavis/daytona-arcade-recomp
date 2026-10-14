@@ -24,6 +24,7 @@ void IoBoard::write(uint32_t index, uint8_t v) {
     index &= 0x7ff;
     ram_[index] = v;
     if (index == 0x11 && drive_commands.size() < kMaxDrive) drive_commands.push_back(v); // to the drive board
+    else if (0xf == index) outputs_write(v);
     if (index != 0x20) return;
     switch (v) {
     case 1: // latch inputs
@@ -48,6 +49,23 @@ void IoBoard::write(uint32_t index, uint8_t v) {
         break;
     default: break;
     }
+}
+    
+void IoBoard::outputs_write(uint8_t data) {
+    uint8_t changes = outputs ^ data;
+    if (0 == changes) {
+        return;
+    }
+    // TODO: cab integration. process changes/outputs bits as per DaytonaOutputsDataMask
+    // i.e. switch lamps on/off as appropriate 
+    /*
+    for (int i = 0; i < 8; i++) {
+        if (changes & (1 << i)) {
+            std::printf("IoBoard: outputs bit %d changed %d->%d\n", i, (outputs >> i) & 1, (data >> i) & 1);
+        }
+    }
+    */
+    outputs = data;
 }
 
 // ---------------------------------------------------------------------------
