@@ -177,7 +177,10 @@ struct Emitter {
         if (leader) {
             line("c.m_IP = " + hex(pc) + ";");
             line(blocks ? "if (block_boundary(ls)) goto dispatch;" : "if (ls.boundary()) goto dispatch;");
-            if (const auto h = g_hooks.find(pc); h != g_hooks.end()) line("rt::hook_" + h->second + "(c);");
+            if (const auto h = g_hooks.find(pc); h != g_hooks.end()) {
+                line("rt::hook_" + h->second + "(c);");
+                line("if (c.m_IP != " + hex(pc) +") { ++ls.count; goto dispatch; }");
+            }
         }
 
         std::string body, exit;   // body runs before ++count; exit transfers control
