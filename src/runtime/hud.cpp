@@ -68,5 +68,52 @@ void hook_hud_lap_tot(Cpu&c) {
     }
 }
 
+void hook_skip_call(Cpu &c) {
+     c.m_IP += 4;
+}
+
+void hook_hide_hud_time(Cpu &c) {
+    if (Hud::hide_hud_time)
+        c.m_IP += 0x104;
+}
+
+void hook_hide_hud_speed(Cpu &c) {
+    if (Hud::hide_hud_speed)
+        c.m_IP += 4;
+}
+
+void hook_hide_hud_gear(Cpu &c) {
+    if (Hud::hide_hud_gear)
+        c.m_IP += 4;
+}
+
+void hook_hide_hud_rpm(Cpu &c) {
+    if (Hud::hide_hud_rpm)
+        c.m_IP += 4;
+}
+
+void hook_hide_hud_laps_init(Cpu &c) {
+    if (Hud::hide_hud_laps) {
+        c.m_IP += 0x54;
+    }
+}
+
+void hook_hide_hud_laps_update(Cpu &c) {
+    if (Hud::hide_hud_laps) {
+        c.m_IP += 4;
+    }
+}
+
+void hook_hide_hud_pos_init(Cpu &c) {
+    if (Hud::hide_hud_pos) {
+        c.m_IP += 0x40;
+    }
+}
+
+void hook_hide_hud_pos_update(Cpu &c) {
+    if (Hud::hide_hud_pos) {
+        c.m_IP += 4;
+    }
+}
 
 } // namespace rt
