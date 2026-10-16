@@ -17,6 +17,12 @@ struct Hud {
     static inline uint32_t hud_rpm      = 0;
     static inline uint32_t hud_lap_cur  = 0;
     static inline uint32_t hud_lap_tot  = 0;
+    static inline bool hide_hud_time    = true;
+    static inline bool hide_hud_speed   = true;
+    static inline bool hide_hud_gear    = true;
+    static inline bool hide_hud_rpm     = true;
+    static inline bool hide_hud_laps    = true;
+    static inline bool hide_hud_pos     = true;
 };
 
 void hook_hud_time(Cpu &c);
@@ -26,5 +32,16 @@ void hook_hud_gear(Cpu&c);
 void hook_hud_rpm(Cpu&c);
 void hook_hud_lap_cur(Cpu&c);
 void hook_hud_lap_tot(Cpu&c);
+
+void hook_skip_call(Cpu &c);
+void hook_hide_hud_time(Cpu &c);
+void hook_hide_hud_speed(Cpu &c);
+void hook_hide_hud_gear(Cpu &c);
+void hook_hide_hud_rpm(Cpu &c);
+void hook_hide_hud_laps_init(Cpu &c);
+void hook_hide_hud_laps_update(Cpu &c);
+void hook_hide_hud_pos_init(Cpu &c);
+void hook_hide_hud_pos_update(Cpu &c);
+
 
 } // namespace rt

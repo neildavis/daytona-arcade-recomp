@@ -3,23 +3,38 @@
 # ADDRESS. Addresses only, our own analysis (rules.md rule 7); see
 # src/runtime/enhance.h. Each hook does nothing while its option is off.
 #
-00003120 hud_lap_cur
 00003408 hud_time
 000035a0 hud_time
-0000387c hud_lap_tot
+#0000a6b4 # Seems to be 'master' subr to init HUD at race start
+0000a6c4 hide_hud_rpm # rpm guage (static)
+0000a6c8 hide_hud_laps_init  # Removes 'LAP' label and e.g. '1 / 8' init at race start
+#0000a73c skip_call # Radar frame / corners
+#0000a778 skip_call # Radar 'TRAFFIC' label
+0000a77c hide_hud_pos_init  # Removes 'POSITION' label and e.g. '/ 40' init at race start
+#0000a7c0 # Seems to be the 'master'subr to update HUD during race
+#0000a7d8 skip_call # ?? 0x1000000
+0000a7dc hide_hud_laps_update # Disables lap counter and times (updates during race)
+#0000a7e0 skip_call # ?? 0x1000a28
+0000a7e4 hide_hud_pos_update # Disables position updates (actual position only, not "/40")
+0000a7e8 hide_hud_rpm # rpm needle
+0000a7ec hide_hud_gear
+0000a7f0 hide_hud_speed
 0000b3ec hud_speed
 0000e44c hud_speed
-0000e49c hud_rpm
 0000e620 hud_speed
+0000e49c hud_rpm
+00011e7c hud_rpm
+00012064 hud_rpm
 00011dbc hud_gear
 00011e04 hud_gear
-00011e7c hud_rpm
 00011f04 hud_gear
 00011f70 hud_gear
-00012064 hud_rpm
 000122c0 hud_pos
 000122d8 hud_pos
+00003120 hud_lap_cur
 000135dc hud_lap_cur
+0000387c hud_lap_tot
+00018b44 hide_hud_time
 # 0x16f74..0x17070 builds the list of course cells to draw (count 0x5016c0,
 # cells from 0x5016c1) from the 5x5 cells around the car's: offsets
 # dx + 16 dy (table 0x17136), slot order nearest first (0x17104, 0x1711d on
