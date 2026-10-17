@@ -514,6 +514,12 @@ int main(int argc, char **argv) {
         if (game && !in_launcher) {
             game->set_aspect(cfg.aspect_ratio()); // widescreen: no-op unless it changed
             game->set_hud_edges(cfg.hud_edges);
+            rt::Hud::hide_hud_time = cfg.hud_hide_time;
+            rt::Hud::hide_hud_speed = cfg.hud_hide_speed;
+            rt::Hud::hide_hud_gear = cfg.hud_hide_gear;
+            rt::Hud::hide_hud_rpm = cfg.hud_hide_rpm;
+            rt::Hud::hide_hud_laps = cfg.hud_hide_laps;
+            rt::Hud::hide_hud_pos = cfg.hud_hide_pos;
             game->set_frame_skip(cfg.draw_mode);
             game->board().video().set_external_3d(cfg.renderer == "hardware" && gpu.ok(), true);
             game->set_stretch_backdrop(cfg.stretch_backdrop);
