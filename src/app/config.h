@@ -37,6 +37,12 @@ struct Config {
     // Enhancements (off by default).
     std::string aspect;        // widescreen: "" (original), "16:10", "16:9", "21:9"
     bool hud_edges = false;    // with widescreen: lap times, position and maps at the screen edges
+    bool hud_hide_time    = false;
+    bool hud_hide_speed   = false;
+    bool hud_hide_gear    = false;
+    bool hud_hide_rpm     = false;
+    bool hud_hide_laps    = false;
+    bool hud_hide_pos     = false;
     bool stretch_backdrop = false; // with widescreen, in-game: the tile backdrop stretched across the width, else plain sky
     int draw_distance = 0;     // scenery: 0 = the game's own, -2..+2 (rt::Enhance)
     uint32_t draw_budget = 0;   // 0 Automatic; positive Custom allowance (runtime/scenery.h)
