@@ -395,6 +395,8 @@ Launcher::Result Launcher::draw(bool game_running, const Devices &devices) {
             ImGui::Spacing();
             ImGui::Separator();
             ImGui::TextUnformatted("Enhancements");
+            if (ImGui::Checkbox("Show FPS counter", &cfg_.show_fps)) cfg_.save();
+            ImGui::SetItemTooltip("New game frames shown per second, in the top-left corner while playing.");
             static const char *aspects[] = {"Original (4:3)", "16:10", "16:9", "21:9"};
             static const char *aspect_ids[] = {"", "16:10", "16:9", "21:9"};
             int aspect = 0;

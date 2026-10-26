@@ -39,6 +39,7 @@ void Config::read(std::istream &f) {
         else if (k == "renderer") renderer = v == "hardware" ? v : "software";
         else if (k == "fullscreen") fullscreen = v == "1";
         else if (k == "skip_launcher") skip_launcher = v == "1";
+        else if (k == "show_fps") show_fps = v == "1";
         else if (k == "aspect") aspect = v;
         else if (k == "hud_edges") hud_edges = v == "1";
         else if (k == "hud_hide_time") hud_hide_time = v == "1";
@@ -101,6 +102,7 @@ void Config::write(std::ostream &f) const {
     f << "renderer=" << renderer << "\n";
     f << "fullscreen=" << (fullscreen ? 1 : 0) << "\n";
     f << "skip_launcher=" << (skip_launcher ? 1 : 0) << "\n";
+    f << "show_fps=" << (show_fps ? 1 : 0) << "\n";
     f << "aspect=" << aspect << "\n";
     f << "hud_edges=" << (hud_edges ? 1 : 0) << "\n";
     f << "hud_hide_time=" << (hud_hide_time ? 1 : 0) << "\n";

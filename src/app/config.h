@@ -35,6 +35,7 @@ struct Config {
     float effects_volume = 1.0f; // 0..1
     bool native_audio = false; // applies on reset; reference remains the default
     // Enhancements (off by default).
+    bool show_fps = false;     // small frames-per-second overlay while playing
     std::string aspect;        // widescreen: "" (original), "16:10", "16:9", "21:9"
     bool hud_edges = false;    // with widescreen: lap times, position and maps at the screen edges
     bool hud_hide_time    = false;

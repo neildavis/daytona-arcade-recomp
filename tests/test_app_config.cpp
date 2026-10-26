@@ -1,4 +1,4 @@
-// Persisted scenery settings round-trip through the same format as launcher.ini.
+// Persisted enhancements round-trip through the same format as launcher.ini.
 // Streams keep tests isolated from the user's live profile.
 #include "app/config.h"
 #include <cstdio>
@@ -11,6 +11,8 @@ int main() {
     };
     app::Config original;
     check(original.draw_budget == 0 && original.aspect_ratio() == 0, "new installs preserve original defaults");
+    check(!original.show_fps, "FPS counter defaults to off");
+    original.show_fps = true;
     original.aspect = "21:9";
     original.draw_distance = 2;
     original.draw_budget = 5000;
@@ -19,6 +21,13 @@ int main() {
     app::Config loaded;
     std::istringstream input(output.str());
     loaded.read(input);
+    check(loaded.show_fps, "enabled FPS counter survives save/load");
+    loaded.show_fps = false;
+    std::ostringstream disabled_output;
+    loaded.write(disabled_output);
+    std::istringstream disabled_input(disabled_output.str());
+    original.read(disabled_input);
+    check(!original.show_fps, "disabled FPS counter survives save/load");
     check(loaded.aspect_ratio() == 21.0 / 9.0 && loaded.draw_budget == 5000 && loaded.draw_distance == 2,
           "custom budget independent of aspect and distance survives save/load");
     std::istringstream automatic("draw_budget=0\naspect=21:9\n");
@@ -35,6 +44,7 @@ int main() {
     std::istringstream legacy("aspect=16:9\ndraw_distance=1\n");
     app::Config old;
     old.read(legacy);
+    check(!old.show_fps, "old settings leave FPS counter off");
     check(old.draw_budget == 0 && old.draw_distance == 1, "old settings use Automatic");
     for (auto value : {"nan:9", "21:inf", "21:0", "-21:9"}) {
         loaded.aspect = value;
