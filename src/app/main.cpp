@@ -401,6 +401,9 @@ int main(int argc, char **argv) {
     app::Pacer pacer;
     pacer.set(app::Pacing{}, SDL_GetTicksNS());
     rt::TestHold test_hold; // the launcher's "Hold Test button"
+    uint64_t fps_since = 0, fps_frames = 0;
+    double fps = 0;
+    bool fps_active = false;
 #ifdef M2_MOBILE
     // Preserve startup detection for a controller paired before launching.
     int pad_count = 0;
@@ -568,6 +571,16 @@ int main(int argc, char **argv) {
             ffb.stop(); // paused in the launcher: let the wheel go
         }
 
+        const bool show_fps = cfg.show_fps && game && !in_launcher;
+        if (!show_fps || !fps_active) {
+            fps_since = SDL_GetTicksNS();
+            fps_frames = 0;
+            fps = 0;
+        }
+        fps_active = show_fps;
+        // Count a newly rendered game image once, even when several simulation
+        // frames ran to catch up or the display repeats it on later refreshes.
+        const bool rendered_frame = new_frame;
         SDL_GPUCommandBuffer *cmd = SDL_AcquireGPUCommandBuffer(dev);
         if (!cmd) return fail("SDL_AcquireGPUCommandBuffer");
         const bool hardware = game && game->board().video().external_3d();
@@ -620,7 +633,7 @@ int main(int argc, char **argv) {
         }
 
         ImDrawData *draw = nullptr;
-        if (in_launcher
+        if (in_launcher || show_fps
 #ifdef M2_MOBILE
             || game != nullptr
 #endif
@@ -640,6 +653,18 @@ int main(int argc, char **argv) {
 #ifdef M2_MOBILE
             else app::draw_touch_controls(touch);
 #endif
+            if (show_fps) {
+                char text[32];
+                std::snprintf(text, sizeof text, "FPS: %.1f", fps);
+                const ImVec2 origin = ImGui::GetMainViewport()->Pos;
+                const float padding = ImGui::GetFontSize() * 0.5f;
+                const ImVec2 pos(origin.x + padding, origin.y + padding);
+                const ImVec2 size = ImGui::CalcTextSize(text);
+                auto *overlay = ImGui::GetForegroundDrawList();
+                overlay->AddRectFilled({origin.x, origin.y},
+                    {pos.x + size.x + padding, pos.y + size.y + padding}, IM_COL32(0, 0, 0, 180));
+                overlay->AddText(pos, IM_COL32_WHITE, text);
+            }
             sync_native_audio();
             ImGui::Render();
             draw = ImGui::GetDrawData();
@@ -672,7 +697,7 @@ int main(int argc, char **argv) {
                 blit.filter = SDL_GPU_FILTER_LINEAR;
                 SDL_BlitGPUTexture(cmd, &blit);
             }
-            if (draw || !have_frame) { // the launcher on top (or a clear screen)
+            if (draw || !have_frame) { // the launcher/overlay on top (or a clear screen)
                 SDL_GPUColorTargetInfo ct{};
                 ct.texture = swap;
                 ct.load_op = have_frame ? SDL_GPU_LOADOP_LOAD : SDL_GPU_LOADOP_CLEAR;
@@ -684,6 +709,16 @@ int main(int argc, char **argv) {
             }
         }
         SDL_SubmitGPUCommandBuffer(cmd);
+        if (show_fps) {
+            if (swap && rendered_frame) ++fps_frames;
+            const uint64_t measured_at = SDL_GetTicksNS();
+            const uint64_t elapsed = measured_at - fps_since;
+            if (elapsed >= 500'000'000) {
+                fps = double(fps_frames) * 1e9 / double(elapsed);
+                fps_since = measured_at;
+                fps_frames = 0;
+            }
+        }
     }
 
     save_nv();
