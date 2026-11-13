@@ -1,24 +1,56 @@
-Speed Km/H @ 00504e18 (4B):
-W:
+Time secs << 6:
+
+93: @ 0x5010d0 (4B):
+00003408 race start
+000035a0 race  update
+RevA: @ 0x5010d0 (4B):
+00003aec race start
+00004030 race  update
+
+
+Speed Km/H :
+93: @ 00504e18 (4B):
 000115e0 (attract speed)
 00225ed8 ( = 0 transmission select)
 0000e44c ( = 0 boot, game start, attract start)
 0000e620 (game speed)
 0000b3ec ( = 0 game over)
+RevA @ 00505198 (4B):
+00011be8 (attract speed)
+002268d8 ( = 0 transmission select)
+0000ed2c ( = 0 boot, game start, game, attract start)
+00004e58 ( = 0 game over)
 
-Position: 0 indexed @ 00504e68 (2B):
+
+
+Position 0 indexed:
+93: @ 00504e6a (2B):
 0000C8a0 (start race )
 000122d8 (rolling start) 
 000122c0 (game - after first OT)
+RevA: @ 005051ec
+0000eaa0 (=0 @ start race )
+0000cb7c (=last @ start race)
+00012810 (rolling start)
+000127f8 (in race - after first OT)
 
-Gear: 0 indexed 0-3 @ 504f48 (4B)
+Gear: 0 indexed 0-3 
+93: @ 00504f48 (4B)
 0000c844 (race start)
 00011dbc (rolling start / auto upshift)
 00011e04 (game / auto downshift)
 00011f70 (game manual down)
 00011f04 (game manual up)
+RevA: @ 005052cc
+0000eaa0 (race start)
+00012318 (rolling start / auto upshift)
+00012360 (game / auto downshift)
+000124cc (game manual down)
+00012460 (game manual up)
 
-Revs: @ 00504f50 / 00504f54 (4B 1/2 pair) 0-8500 (0x2134) (8500):
+
+Revs: 0-8500 (0x2134) (8500) 
+93: @ 00504f50 / 00504f54 (4B 1/2 pair) :
 * 00504f50:
 0000e498 ( = 0 race start / attract start / attract view change)
 000103fc (rolling start / game)
@@ -29,10 +61,24 @@ Revs: @ 00504f50 / 00504f54 (4B 1/2 pair) 0-8500 (0x2134) (8500):
 0000e49c ( = 0 race start / attract start / attract view change)
 00011e7c (rolling start)
 00012064 (game)
+RevA: @ 005052d4 / 005052d8 (as above)
+* 005052d8:
+0000eaa0 ( = 0 race start / attract start / attract view change)
+000123d8 (rolling start, game)
+000125c0 (game)
+
 
 Current Lap: @ 5010e0 (4B) 0-7
+93:
 00003120 ( = 0 race start)
 000135dc (game inc +1 per lap)
+RevA:
+0000384c ( = 0 race start)
+00013b98 (game inc +1 per lap)
+
 
 Total Laps: @ 5010ec (4B) 2/4/8
+93:
 0000387c ( = 8 Boot, attract track change, race start)
+RevA:
+00004614 ( = 8 Boot, attract track change, race start)

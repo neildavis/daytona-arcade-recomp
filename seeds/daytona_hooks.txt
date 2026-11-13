@@ -4,6 +4,22 @@
 # src/runtime/enhance.h and seeds/daytona93_hooks.txt, whose hooks these are,
 # carried over by scripts/seed_map.py --hooks.
 #
+00003aec hud_time
+00004030 hud_time
+00004e58 hud_speed
+0000ed2c hud_speed
+000127f8 hud_pos
+00012810 hud_pos
+00012318 hud_gear
+00012360 hud_gear
+00012460 hud_gear
+000124cc hud_gear
+0000eaa0 hud_rpm
+000123d8 hud_rpm
+000125c0 hud_rpm
+0000384c hud_lap_cur
+00013b98 hud_lap_cur
+00004614 hud_lap_tot
 # The draw-list routine is daytona93's 0x16f74..0x17078 moved by 0x490, the
 # same instructions (masked: branch and address words aside) and the same RAM
 # (count 0x5016c0, cells from 0x5016c1, budget 0x5010f4 set at boot, 0x12f8).
