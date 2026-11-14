@@ -20,6 +20,21 @@
 0000384c hud_lap_cur
 00013b98 hud_lap_cur
 00004614 hud_lap_tot
+0000b42c hide_hud_rpm # rpm guage (static)
+0000B440 hide_hud_laps_init # disable "lap" label (0xB440) & "/8" static text (0xB444) by cpu.IP += 8
+#0000b474 skip_call # radar corners
+#0000b4b0 skip_call # 'traffic' label
+#0101024c skip_call # ???
+#0000B450 skip_call # ???
+0000b4b4 hide_hud_pos_init  # Removes 'POSITION' label and e.g. '/ 40' init at race start
+0000b5c0 hide_hud_gear # "put stick to 4 ->" when manual transmission start
+0000b5d0 hide_hud_laps_update # Disables lap times (updates during race)
+0000b5d4 hide_hud_laps_update # Disables lap counter (updates during race)
+0000b5dc hide_hud_pos_update # Disables position updates (actual position only, not "/40")
+0000b5e0 hide_hud_rpm # rpm needle
+0000b5e4 hide_hud_gear
+0000b5e8 hide_hud_speed
+0001901c hide_hud_time
 # The draw-list routine is daytona93's 0x16f74..0x17078 moved by 0x490, the
 # same instructions (masked: branch and address words aside) and the same RAM
 # (count 0x5016c0, cells from 0x5016c1, budget 0x5010f4 set at boot, 0x12f8).

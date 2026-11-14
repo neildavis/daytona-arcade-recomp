@@ -105,7 +105,11 @@ void hook_hide_hud_rpm(Cpu &c) {
 
 void hook_hide_hud_laps_init(Cpu &c) {
     if (Hud::hide_hud_laps) {
-        c.m_IP += 0x54;
+        if (kIsRevisionA) {
+            c.m_IP += 0x8;
+        } else {
+            c.m_IP += 0x54;
+        }
     }
 }
 
