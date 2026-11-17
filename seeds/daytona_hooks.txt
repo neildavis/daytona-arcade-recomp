@@ -27,7 +27,7 @@
 #0101024c skip_call # ???
 #0000B450 skip_call # ???
 0000b4b4 hide_hud_pos_init  # Removes 'POSITION' label and e.g. '/ 40' init at race start
-0000b5c0 hide_hud_gear # "put stick to 4 ->" when manual transmission start
+#0000b5c0 hide_hud_gear # "put stick to 4 ->" when manual transmission start: ON or OFF
 0000b5d0 hide_hud_laps_update # Disables lap times (updates during race)
 0000b5d4 hide_hud_laps_update # Disables lap counter (updates during race)
 0000b5dc hide_hud_pos_update # Disables position updates (actual position only, not "/40")
@@ -35,6 +35,8 @@
 0000b5e4 hide_hud_gear
 0000b5e8 hide_hud_speed
 0001901c hide_hud_time
+00223d38 hud_gear_prompt_on    # "put stick to 4 ->" when manual transmission start: ON
+00223d78 hud_gear_prompt_off   # "put stick to 4 ->" when manual transmission start: OFF
 # The draw-list routine is daytona93's 0x16f74..0x17078 moved by 0x490, the
 # same instructions (masked: branch and address words aside) and the same RAM
 # (count 0x5016c0, cells from 0x5016c1, budget 0x5010f4 set at boot, 0x12f8).

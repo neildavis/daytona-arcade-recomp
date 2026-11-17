@@ -32,6 +32,8 @@ void hook_hud_gear(Cpu&c);
 void hook_hud_rpm(Cpu&c);
 void hook_hud_lap_cur(Cpu&c);
 void hook_hud_lap_tot(Cpu&c);
+void hook_hud_gear_prompt_on(Cpu&c);    // 'PUT THE STICK TO 4' - shown
+void hook_hud_gear_prompt_off(Cpu&c);   // ditto - hidden
 
 void hook_skip_call(Cpu &c);
 void hook_hide_hud_time(Cpu &c);

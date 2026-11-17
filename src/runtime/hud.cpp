@@ -78,6 +78,19 @@ void hook_hud_lap_tot(Cpu&c) {
         //std::printf("HUD: Total Laps=%d\n", new_lap);
     }
 }
+void hook_hud_gear_prompt_on(Cpu&c) {
+    // 'PUT THE STICK TO 4' - shown
+    //std::printf("'PUT THE STICK TO 4' SHOWN\n");
+    if (Hud::hide_hud_gear)
+        c.m_IP += 4;
+}
+
+void hook_hud_gear_prompt_off(Cpu&c) {
+    // 'PUT THE STICK TO 4' - hidden
+    //std::printf("'PUT THE STICK TO 4' HIDDEN\n");
+    if (Hud::hide_hud_gear)
+        c.m_IP += 4;
+}
 
 void hook_skip_call(Cpu &c) {
      c.m_IP += 4;
