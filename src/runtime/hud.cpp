@@ -13,6 +13,16 @@ constexpr uint32_t kHudGearAddr     = kIsRevisionA ? 0x5052cc : 0x504f48;
 constexpr uint32_t kHudRevsAddr     = kIsRevisionA ? 0x5052d8 : 0x504f54;
 constexpr uint32_t kHudLapCurAddr   =  0x5010e0;
 constexpr uint32_t kHudLapTotAddr   =  0x5010ec;
+constexpr uint32_t kHudTrackIdAddr  =  0x501460; // RevA. Not confirmed for 93 yet
+}
+
+constexpr const char* trackid_to_string(TrackId track) noexcept {
+    switch (track) {
+        case TrackId::Beginner: return "Beginner";
+        case TrackId::Expert:   return "Expert";
+        case TrackId::Advanced: return "Advanced";
+    }
+    return "Unknown";
 }
 
 void hook_hud_time(Cpu &c) {
@@ -80,16 +90,26 @@ void hook_hud_lap_tot(Cpu&c) {
 }
 void hook_hud_gear_prompt_on(Cpu&c) {
     // 'PUT THE STICK TO 4' - shown
-    //std::printf("'PUT THE STICK TO 4' SHOWN\n");
+    //std::printf("HUD: 'PUT THE STICK TO 4' SHOWN\n");
     if (Hud::hide_hud_gear)
         c.m_IP += 4;
 }
 
 void hook_hud_gear_prompt_off(Cpu&c) {
     // 'PUT THE STICK TO 4' - hidden
-    //std::printf("'PUT THE STICK TO 4' HIDDEN\n");
+    //std::printf("HUD: 'PUT THE STICK TO 4' HIDDEN\n");
     if (Hud::hide_hud_gear)
         c.m_IP += 4;
+}
+
+void hook_hud_track(Cpu&c) {
+    uint32_t new_track_id = c.bus->read_dword(kHudTrackIdAddr);
+    if (new_track_id != static_cast<uint32_t>(Hud::hud_track_id) &&
+        new_track_id >= static_cast<uint32_t>(TrackId::Beginner) &&
+        new_track_id <= static_cast<uint32_t>(TrackId::Advanced)) {
+        Hud::hud_track_id = static_cast<TrackId>(new_track_id);
+        std::printf("HUD: Track=%s\n",  trackid_to_string(Hud::hud_track_id));
+    } 
 }
 
 void hook_skip_call(Cpu &c) {

@@ -4,6 +4,8 @@
 # src/runtime/enhance.h and seeds/daytona93_hooks.txt, whose hooks these are,
 # carried over by scripts/seed_map.py --hooks.
 #
+0000212c hud_track
+00225fc0 hud_track
 00003aec hud_time
 00004030 hud_time
 00004e58 hud_speed

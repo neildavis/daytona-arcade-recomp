@@ -9,6 +9,12 @@
 
 namespace rt {
 
+enum class TrackId : uint32_t {
+    Beginner    = 0,
+    Expert      = 1,
+    Advanced    = 2,
+};
+
 struct Hud {
     static inline uint32_t hud_time     = 0;
     static inline uint32_t hud_speed    = 0;
@@ -17,6 +23,7 @@ struct Hud {
     static inline uint32_t hud_rpm      = 0;
     static inline uint32_t hud_lap_cur  = 0;
     static inline uint32_t hud_lap_tot  = 0;
+    static inline TrackId  hud_track_id = TrackId::Beginner;
     static inline bool hide_hud_time    = true;
     static inline bool hide_hud_speed   = true;
     static inline bool hide_hud_gear    = true;
@@ -34,8 +41,10 @@ void hook_hud_lap_cur(Cpu&c);
 void hook_hud_lap_tot(Cpu&c);
 void hook_hud_gear_prompt_on(Cpu&c);    // 'PUT THE STICK TO 4' - shown
 void hook_hud_gear_prompt_off(Cpu&c);   // ditto - hidden
+void hook_hud_track(Cpu&c);
 
 void hook_skip_call(Cpu &c);
+
 void hook_hide_hud_time(Cpu &c);
 void hook_hide_hud_speed(Cpu &c);
 void hook_hide_hud_gear(Cpu &c);
