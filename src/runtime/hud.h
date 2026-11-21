@@ -15,21 +15,32 @@ enum class TrackId : uint32_t {
     Advanced    = 2,
 };
 
+enum class StartSeq : uint32_t {
+    Ready   = 0x00,
+    Three   = 0x01,
+    Two     = 0x02,
+    One     = 0x03,
+    Go      = 0x05,
+    Race    = 0x40,
+    None    = 0xff
+};
+
 struct Hud {
-    static inline uint32_t hud_time     = 0;
-    static inline uint32_t hud_speed    = 0;
-    static inline uint16_t hud_pos      = 0;
-    static inline uint32_t hud_gear     = 0;
-    static inline uint32_t hud_rpm      = 0;
-    static inline uint32_t hud_lap_cur  = 0;
-    static inline uint32_t hud_lap_tot  = 0;
-    static inline TrackId  hud_track_id = TrackId::Beginner;
-    static inline bool hide_hud_time    = true;
-    static inline bool hide_hud_speed   = true;
-    static inline bool hide_hud_gear    = true;
-    static inline bool hide_hud_rpm     = true;
-    static inline bool hide_hud_laps    = true;
-    static inline bool hide_hud_pos     = true;
+    static inline uint32_t hud_time         = 0;
+    static inline uint32_t hud_speed        = 0;
+    static inline uint16_t hud_pos          = 0;
+    static inline uint32_t hud_gear         = 0;
+    static inline uint32_t hud_rpm          = 0;
+    static inline uint32_t hud_lap_cur      = 0;
+    static inline uint32_t hud_lap_tot      = 0;
+    static inline TrackId  hud_track_id     = TrackId::Beginner;
+    static inline StartSeq hud_start_seq    = StartSeq::None;
+    static inline bool hide_hud_time        = true;
+    static inline bool hide_hud_speed       = true;
+    static inline bool hide_hud_gear        = true;
+    static inline bool hide_hud_rpm         = true;
+    static inline bool hide_hud_laps        = true;
+    static inline bool hide_hud_pos         = true;
 };
 
 void hook_hud_time(Cpu &c);
@@ -42,6 +53,9 @@ void hook_hud_lap_tot(Cpu&c);
 void hook_hud_gear_prompt_on(Cpu&c);    // 'PUT THE STICK TO 4' - shown
 void hook_hud_gear_prompt_off(Cpu&c);   // ditto - hidden
 void hook_hud_track(Cpu&c);
+void hook_hud_roll_start(Cpu&c);
+void hook_game_state(Cpu&c);
+void hook_game_state_frame_cnt(Cpu&c);
 
 void hook_skip_call(Cpu &c);
 

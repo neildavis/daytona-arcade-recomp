@@ -4,6 +4,8 @@
 # src/runtime/enhance.h and seeds/daytona93_hooks.txt, whose hooks these are,
 # carried over by scripts/seed_map.py --hooks.
 #
+00001970 game_state
+00003ecc game_state_frame_cnt # start sequence ONLY
 0000212c hud_track
 00225fc0 hud_track
 00003aec hud_time
@@ -24,6 +26,11 @@
 00004614 hud_lap_tot
 0000b42c hide_hud_rpm # rpm guage (static)
 0000B440 hide_hud_laps_init # disable "lap" label (0xB440) & "/8" static text (0xB444) by cpu.IP += 8
+00003a9c hud_roll_start # Ready
+0000c4e4 hud_roll_start # 3
+0000c490 hud_roll_start # 2
+0000c454 hud_roll_start # 1
+0000c3f0 hud_roll_start # Go / Race
 #0000b474 skip_call # radar corners
 #0000b4b0 skip_call # 'traffic' label
 #0101024c skip_call # ???
