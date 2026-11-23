@@ -41,6 +41,7 @@ struct Hud {
     static inline bool hide_hud_rpm         = true;
     static inline bool hide_hud_laps        = true;
     static inline bool hide_hud_pos         = true;
+    static inline bool hide_hud_start_seq   = true; // Rolling start only for now
 };
 
 void hook_hud_time(Cpu &c);
@@ -67,6 +68,7 @@ void hook_hide_hud_laps_init(Cpu &c);
 void hook_hide_hud_laps_update(Cpu &c);
 void hook_hide_hud_pos_init(Cpu &c);
 void hook_hide_hud_pos_update(Cpu &c);
+void hook_hide_hud_start_seq(Cpu &c);
 
 
 } // namespace rt

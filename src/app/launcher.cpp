@@ -449,12 +449,14 @@ Launcher::Result Launcher::draw(bool game_running, const Devices &devices) {
                 cfg_.save();
             }
             ImGui::BeginDisabled(game_running);
-            if (ImGui::Checkbox("HUD: Hide Time remaining", &cfg_.hud_hide_time))   { cfg_.save(); rt::Hud::hide_hud_time   = cfg_.hud_hide_time;   }
-            if (ImGui::Checkbox("HUD: Hide Speed", &cfg_.hud_hide_speed))           { cfg_.save(); rt::Hud::hide_hud_speed  = cfg_.hud_hide_speed;  }
-            if (ImGui::Checkbox("HUD: Hide Gear icon", &cfg_.hud_hide_gear))        { cfg_.save(); rt::Hud::hide_hud_gear   = cfg_.hud_hide_gear;   }
-            if (ImGui::Checkbox("HUD: Hide Tachometer", &cfg_.hud_hide_rpm))        { cfg_.save(); rt::Hud::hide_hud_rpm    = cfg_.hud_hide_rpm;    }
-            if (ImGui::Checkbox("HUD: Hide Lap Data", &cfg_.hud_hide_laps))         { cfg_.save(); rt::Hud::hide_hud_laps   = cfg_.hud_hide_laps;   }
-            if (ImGui::Checkbox("HUD: Hide Position", &cfg_.hud_hide_pos))          { cfg_.save(); rt::Hud::hide_hud_pos    = cfg_.hud_hide_pos;    }
+            if (ImGui::Checkbox("HUD: Hide Time remaining", &cfg_.hud_hide_time))       { cfg_.save(); rt::Hud::hide_hud_time       = cfg_.hud_hide_time;       }
+            if (ImGui::Checkbox("HUD: Hide Speed", &cfg_.hud_hide_speed))               { cfg_.save(); rt::Hud::hide_hud_speed      = cfg_.hud_hide_speed;      }
+            if (ImGui::Checkbox("HUD: Hide Gear icon", &cfg_.hud_hide_gear))            { cfg_.save(); rt::Hud::hide_hud_gear       = cfg_.hud_hide_gear;       }
+            if (ImGui::Checkbox("HUD: Hide Tachometer", &cfg_.hud_hide_rpm))            { cfg_.save(); rt::Hud::hide_hud_rpm        = cfg_.hud_hide_rpm;        }
+            if (ImGui::Checkbox("HUD: Hide Lap Data", &cfg_.hud_hide_laps))             { cfg_.save(); rt::Hud::hide_hud_laps       = cfg_.hud_hide_laps;       }
+            if (ImGui::Checkbox("HUD: Hide Position", &cfg_.hud_hide_pos))              { cfg_.save(); rt::Hud::hide_hud_pos        = cfg_.hud_hide_pos;        }
+            if (ImGui::Checkbox("HUD: Hide Start Sequence", &cfg_.hud_hide_start_seq))  { cfg_.save(); rt::Hud::hide_hud_start_seq  = cfg_.hud_hide_start_seq;  }
+            ImGui::TextDisabled("Applies to rolling start (Beginner track) only.\n");
             ImGui::EndDisabled();
             ImGui::BeginDisabled(cfg_.aspect.empty());
             if (ImGui::Checkbox("HUD at the screen edges (Experimental)", &cfg_.hud_edges)) cfg_.save();

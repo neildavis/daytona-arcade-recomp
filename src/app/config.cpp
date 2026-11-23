@@ -49,6 +49,7 @@ void Config::read(std::istream &f) {
         else if (k == "hud_hide_rpm") hud_hide_rpm = v == "1";
         else if (k == "hud_hide_laps") hud_hide_laps = v == "1";
         else if (k == "hud_hide_pos") hud_hide_pos = v == "1";
+        else if (k == "hud_hide_start_seq") hud_hide_start_seq = v == "1";
         else if (k == "stretch_backdrop") stretch_backdrop = v == "1";
         else if (k == "draw_distance") draw_distance = std::clamp(std::atoi(v.c_str()), -2, 2);
         else if (k == "draw_budget") {
@@ -123,6 +124,7 @@ void Config::write(std::ostream &f) const {
     f << "hud_hide_rpm=" << (hud_hide_rpm ? 1 : 0) << "\n";
     f << "hud_hide_laps=" << (hud_hide_laps ? 1 : 0) << "\n";
     f << "hud_hide_pos=" << (hud_hide_pos ? 1 : 0) << "\n";
+    f << "hud_hide_start_seq=" << (hud_hide_start_seq ? 1 : 0) << "\n";
     f << "stretch_backdrop=" << (stretch_backdrop ? 1 : 0) << "\n";
     f << "draw_distance=" << draw_distance << "\n";
     f << "draw_budget=" << draw_budget << "\n";

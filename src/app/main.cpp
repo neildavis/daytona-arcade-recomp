@@ -529,6 +529,7 @@ int main(int argc, char **argv) {
             rt::Hud::hide_hud_rpm = cfg.hud_hide_rpm;
             rt::Hud::hide_hud_laps = cfg.hud_hide_laps;
             rt::Hud::hide_hud_pos = cfg.hud_hide_pos;
+            rt::Hud::hide_hud_start_seq = cfg.hud_hide_start_seq;
             game->set_frame_skip(cfg.draw_mode);
             game->board().video().set_external_3d(cfg.renderer == "hardware" && gpu.ok(), true);
             game->set_stretch_backdrop(cfg.stretch_backdrop);

@@ -243,4 +243,11 @@ void hook_hide_hud_pos_update(Cpu &c) {
     }
 }
 
+void hook_hide_hud_start_seq(Cpu &c) {
+    if (Hud::hide_hud_start_seq) {
+        c.m_IP += 4;
+    }
+}
+
+
 } // namespace rt

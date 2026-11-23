@@ -43,6 +43,10 @@
 0000b5e0 hide_hud_rpm # rpm needle
 0000b5e4 hide_hud_gear
 0000b5e8 hide_hud_speed
+0000c4c8 hide_hud_start_seq # rolling start '3'
+0000c474 hide_hud_start_seq # rolling start '2'
+0000c438 hide_hud_start_seq # rolling start '1'
+0000c408 hide_hud_start_seq # rolling start 'GO'
 0001901c hide_hud_time
 00223d38 hud_gear_prompt_on    # "put stick to 4 ->" when manual transmission start: ON
 00223d78 hud_gear_prompt_off   # "put stick to 4 ->" when manual transmission start: OFF
